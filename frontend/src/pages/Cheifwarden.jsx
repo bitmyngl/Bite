@@ -6,6 +6,7 @@ import Currentmenu from "./../components/Currentmessmenu.jsx"
 import Review from "../components/Review.jsx";
 import Feedback from "../components/Comment.jsx";
 import Cheifwardenintro from "./../components/Cheifwardenintro.jsx";
+import Complaintchiefwarden from "../components/Complaintchiefwarden.jsx";
 
 function Cheifwarden(){
     return(
@@ -19,6 +20,8 @@ function Cheifwarden(){
         {/* <Comment /> */}
         <Gallary />
         {/* <Complaint /> */}
+        <Complaintchiefwarden />
+
     </div>
     );
 }

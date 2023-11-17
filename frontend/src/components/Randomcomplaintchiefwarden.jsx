@@ -1,12 +1,17 @@
-import "./../styles/review.css";
+import "./../styles/randomcomplaintchiefwarden.css";
+import { pink } from '@mui/material/colors';
+import Checkbox from '@mui/material/Checkbox';
+
 
 import {
-  Card,
-  CardHeader,
+    Card,
+    CardHeader,
   CardBody,
   Typography,
   Avatar,
 } from "@material-tailwind/react";
+
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 function StarIcon() {
   return (
@@ -27,12 +32,12 @@ function StarIcon() {
 
 export default function Review(props) {
   return (
-    <div className="review-outer-outermost-box">
-      <div className="review-outermost-box">
+    <div>
+      <div className="review-outermost-box-randomcomplaint">
         <Card
           color="transparent"
           shadow={false}
-          className="cardclass w-full max-w-[26rem]"
+          className="cardclass-randomcomplaint w-full max-w-[26rem]"
         >
           <CardHeader
             color="transparent"
@@ -48,8 +53,8 @@ export default function Review(props) {
             /> */}
             <div className="flex w-full flex-col gap-0.5">
               <div className="flex items-center justify-between">
-                <Typography variant="h2" color="blue-gray">
-                  Sour Man
+                <Typography variant="h2" color="blue-grey">
+                  Mrinsh Kwes
                 </Typography>
                 <div className="5 flex items-center gap-0">
                   <StarIcon />
@@ -59,19 +64,22 @@ export default function Review(props) {
                   <StarIcon />
                 </div>
               </div>
-              <Typography variant="h5" color="blue-gray">
-                2nd Year Room no 326
+              <Typography variant="h5" color="blue-grey">
+                3rd Year student
               </Typography>
             </div>
           </CardHeader>
           <CardBody className="mb-6 p-0">
-            <Typography className="comment-text">
-              &quot;{props.comment}&quot;
+            <Typography className="comment-text-randomcomplaint">
+              &quot;Lorem ipsum dolor sit amet consectetur, adipisicing
+              elit.&quot;
             </Typography>
           </CardBody>
         </Card>
       </div>
-      
+      <div className="button-group-complaint">
+      <Checkbox {...label} color="success" size="large"/>
+      </div>
     </div>
   );
 }

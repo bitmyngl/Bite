@@ -40,10 +40,6 @@ function Commentlist() {
       <div className="commentlist-second-outer container">
         <h1>Comment List</h1>
         <div className="row">
-          {/* <div className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-            <Review comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
-          </div>
-
           <div className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
             <Review comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
           </div>
@@ -66,7 +62,11 @@ function Commentlist() {
 
           <div className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
             <Review comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
-          </div> */}
+          </div>
+
+          <div className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
+            <Review comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
+          </div>
 
           {comments.map((comment, index) => (
             <div

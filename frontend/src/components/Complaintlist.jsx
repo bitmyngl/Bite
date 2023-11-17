@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./../styles/complaintlist.css";
-import Randomcomplaint from "./Randomcomplaint";
+import Randomcomplaintchiefwarden from "./Randomcomplaintchiefwarden";
 
 function Complaintlist() {
   const [commentText, setCommentText] = useState("");
@@ -39,31 +39,31 @@ function Complaintlist() {
         <h1>Complaint List</h1>
         <div className="row">
           <div className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-            <Randomcomplaint comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
+            <Randomcomplaintchiefwarden comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
           </div>
 
           <div className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-            <Randomcomplaint comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
+            <Randomcomplaintchiefwarden comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
           </div>
 
           <div className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-            <Randomcomplaint comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
+            <Randomcomplaintchiefwarden comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
           </div>
 
           <div className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-            <Randomcomplaint comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
+            <Randomcomplaintchiefwarden comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
           </div>
 
           <div className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-            <Randomcomplaint comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
+            <Randomcomplaintchiefwarden comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
           </div>
 
           <div className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-            <Randomcomplaint comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
+            <Randomcomplaintchiefwarden comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
           </div>
 
           <div className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-            <Randomcomplaint comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
+            <Randomcomplaintchiefwarden comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
           </div>
 
           {comments.map((comment, index) => (
@@ -71,7 +71,7 @@ function Complaintlist() {
               key={index}
               className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4"
             >
-              <Randomcomplaint comment={comment} />
+              <Randomcomplaintchiefwarden comment={comment} />
             </div>
           ))}
         </div>

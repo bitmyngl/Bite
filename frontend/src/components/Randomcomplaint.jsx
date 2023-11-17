@@ -1,4 +1,7 @@
 import "./../styles/randomcomplaint.css";
+import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
+import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
+
 import {
   Card,
   CardHeader,
@@ -69,7 +72,16 @@ export default function Review(props) {
             </Typography>
           </CardBody>
         </Card>
-      </div>
+      </div><div className="button-group-complaint">
+
+<div className="upbutton-group-box">
+      <ArrowCircleUpIcon className="uparrow-complaint" style={{ fontSize: '40px' }}/>
+</div>
+<div className="downbutton-group-box">
+      <ArrowCircleDownIcon className="downarrow-complaint" style={{ fontSize: '40px' }}/>
+</div>
+
+</div>
     </div>
   );
 }

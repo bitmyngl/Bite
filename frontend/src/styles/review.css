@@ -6,8 +6,10 @@
     height: 600px;
     width: 100vw;
 } */
+
+
 .review-outermost-box{
-    /* border: 5px solid palegreen; */
+    /* border: 2px solid red; */
     display: flex;
     justify-content: center;
     align-items: center;
