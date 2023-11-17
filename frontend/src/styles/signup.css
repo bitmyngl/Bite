@@ -1,0 +1,16 @@
+.form-outline {
+    height: 32px;
+    width: 271px;
+}
+.signup-otpform-outermostbox{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 2px solid red; */
+}
+.signup-otpform-secondouterbox{
+    border: 2px solid green;
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
