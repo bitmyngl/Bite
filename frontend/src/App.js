@@ -13,6 +13,8 @@ import Cheifwarden from './pages/Cheifwarden';
 import Accountant from "./pages/Accountant";
 import Patelallcomplaint from "./pages/patelstudent/Patelallcomplaint";
 import Signup from './pages/Signup';
+import Otpverification from "./pages/Otpverification";
+import Passwordcreate from './pages/Passwordcreate';
 
 function App() {
     return (
@@ -23,6 +25,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/otpverification" element={<Otpverification />} />
+          <Route path="/passwordcreate" element={<Passwordcreate />} />
           <Route path="/patelstudent" element={<Patelstudent />} />
           {/* <Route path="/login" element={<Login />} /> */}
           <Route path="/patelgallery" element={<Patelgallery />} />

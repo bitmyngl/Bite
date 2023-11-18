@@ -8,7 +8,6 @@ import "./../styles/signup.css";
 export default function Signup(props) {
 
     
-
   const [email, setEmail] = useState("");
   const [dob, setDOB] = useState("");
   const navigate = useNavigate();
@@ -16,9 +15,8 @@ export default function Signup(props) {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-
-    // Send a request to the backend for validation
     try {
+      // Send a request to the backend for validation
       const response = await fetch("http://localhost:5000/api/validateUser", {
         method: "POST",
         headers: {
@@ -47,8 +45,8 @@ export default function Signup(props) {
           if (otpData.success) {
             // OTP sent successfully, navigate to the next page or display a success message
             alert("OTP sent successfully!");
-            // Add navigation logic or display a success message
-            navigate("/patelstudent");// Use  navigate
+            // Pass the user ID to the OTPVerification component
+            navigate("/otpverification", { state: { userId: data.userId } });
           } else {
             alert("Failed to send OTP. Please try again.");
           }

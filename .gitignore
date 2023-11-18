@@ -1,9 +1,64 @@
+# macOS system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+
+# JetBrains IDE settings
+.idea/
+
+# Node.js dependencies
+node_modules/
+
+# Composer dependencies for PHP projects
+vendor/
+
+# Temporary files
+*.log
+*.tmp
+
+# Java build artifacts
+build/
+dist/
+*.jar
+*.war
+*.ear
+
+# Visual Studio Code settings
+.vscode/
+
+# Python compiled files
+*.pyc
+__pycache__/
+
+# Java compiled classes
+*.class
+
+# Configuration files
+*.config
+*.properties
+
+# Environment configuration files
+.env
+
+# Logs and database files
+*.log
+*.sqlite
+*.db
+
+# Visual Studio Code workspace settings
+.vscode/settings.json
+
+
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
 /node_modules
 /.pnp
 .pnp.js
+
+node_modules/
+backend/node_modules/
 
 # testing
 /coverage
@@ -21,3 +76,78 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+
+# Node.js dependencies
+node_modules/
+
+# npm lock file
+package-lock.json
+
+# Yarn lock file
+yarn.lock
+
+# Python virtual environment
+venv/
+__pycache__/
+
+# Java build artifacts
+target/
+*.class
+
+# Compiled files
+*.pyc
+*.class
+
+# IntelliJ IDEA settings
+.idea/
+
+# Visual Studio Code settings
+.vscode/
+
+# Logs and databases
+*.log
+*.sqlite
+*.db
+
+# Environment configuration files
+.env
+
+# Temporary files
+*.tmp
+
+# macOS system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+
+
+# Node.js dependencies
+node_modules/
+
+# npm lock file
+package-lock.json
+
+# Yarn lock file
+yarn.lock
+
+# Express.js generated files
+dist/
+
+# MongoDB data directory
+data/
+
+# Logs
+*.log
+
+# Environment configuration files
+.env
+
+# macOS system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+
