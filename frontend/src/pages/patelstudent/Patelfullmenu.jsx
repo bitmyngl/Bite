@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import { Link } from 'react-router-dom';
 import Randomdaymessmenu from "./../../components/Randomdaymessmenu";
 import Navbar from "./../../components/Navbar";
 
@@ -7,6 +8,11 @@ function Patelfullmenu(){
     return (
         <div>
             <Navbar />
+            <div>
+                <h1>
+                <Link to="/patelmenudetails">Checkout timings and more</Link>
+                </h1>
+            </div>
             <div>
             <Randomdaymessmenu day="Monday munchies madness"/>
             <Randomdaymessmenu day="tasty Tuesday treats"/>

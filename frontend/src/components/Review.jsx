@@ -49,7 +49,7 @@ export default function Review(props) {
             <div className="flex w-full flex-col gap-0.5">
               <div className="flex items-center justify-between">
                 <Typography variant="h2" color="blue-gray">
-                  Sour Man
+                   {props.username}
                 </Typography>
                 <div className="5 flex items-center gap-0">
                   <StarIcon />

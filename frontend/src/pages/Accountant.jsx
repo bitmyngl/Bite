@@ -7,6 +7,7 @@ import Review from "../components/Review.jsx";
 import Feedback from "../components/Comment.jsx";
 import Accountantintro from "./../components/Accountantintro.jsx";
 import Dailyexpense from "./../components/Dailyexpense.jsx";
+import Monthlyexpense from "../components/Monthlyexpense.jsx";
 
 function Patelstudent(){
     return(
@@ -14,6 +15,7 @@ function Patelstudent(){
         <Navbar />
         <Accountantintro />
         <Dailyexpense />
+        <Monthlyexpense />
         {/* <Review /> */}
         {/* <Feedback /> */}
 

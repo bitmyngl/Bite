@@ -8,30 +8,39 @@ function Commentlist() {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
+    fetchComments();
+  }, []);
+
+  const fetchComments = () => {
     axios.get("http://localhost:5000/api/patelcomment")
       .then(response => {
         console.log(response.data);
-        const commentArray = response.data.map(commentObj => commentObj.comment);
-        setComments(commentArray);
+        setComments(response.data);
       })
       .catch(error => {
         console.error('Error fetching comments:', error);
       });
-  }, []);
+  };
 
   const handleCommentChange = (event) => {
     setCommentText(event.target.value);
   };
 
-  
-
   const handleCommentSubmit = () => {
     if (commentText.trim() !== "") {
-      // Add the new comment to the list
-      setComments([...comments, commentText]);
-
-      // Clear the input field
-      setCommentText("");
+      axios.post("http://localhost:5000/api/patelcomment", {
+        // Include other fields as needed (username, email, regno, time)
+        comment: commentText,
+      })
+        .then(() => {
+          // If the comment is successfully saved, fetch the updated comments
+          fetchComments();
+          // Clear the input field
+          setCommentText("");
+        })
+        .catch(error => {
+          console.error('Error adding comment:', error);
+        });
     }
   };
 
@@ -40,40 +49,9 @@ function Commentlist() {
       <div className="commentlist-second-outer container">
         <h1>Comment List</h1>
         <div className="row">
-          <div className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-            <Review comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
-          </div>
-
-          <div className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-            <Review comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
-          </div>
-
-          <div className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-            <Review comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
-          </div>
-
-          <div className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-            <Review comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
-          </div>
-
-          <div className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-            <Review comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
-          </div>
-
-          <div className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-            <Review comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
-          </div>
-
-          <div className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-            <Review comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
-          </div>
-
-          {comments.map((comment, index) => (
-            <div
-              key={index}
-              className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4"
-            >
-              <Review comment={comment} />
+          {comments.map((commentObj, index) => (
+            <div key={index} className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
+              <Review comment={commentObj.comment} />
             </div>
           ))}
         </div>
@@ -91,10 +69,9 @@ function Commentlist() {
           ></textarea>
         </div>
         <div className="submit-section">
-        <button className="btn btn-primary" onClick={handleCommentSubmit}>
+          <button className="btn btn-primary" onClick={handleCommentSubmit}>
             Submit
           </button>
-
         </div>
       </div>
     </div>

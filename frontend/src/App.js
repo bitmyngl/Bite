@@ -15,12 +15,15 @@ import Patelallcomplaint from "./pages/patelstudent/Patelallcomplaint";
 import Signup from './pages/Signup';
 import Otpverification from "./pages/Otpverification";
 import Passwordcreate from './pages/Passwordcreate';
+import Patelmenudetails from './components/Patelmenudetails';
+
 
 function App() {
     return (
       <Router>
         {/* <Navigation /> */}
         {/* <Navbar /> */}
+      
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -32,6 +35,7 @@ function App() {
           <Route path="/patelgallery" element={<Patelgallery />} />
           <Route path="/patelcomment" element={<Patelcomment />} />
           <Route path="/patelfullmenu" element={<Patelfullmenu />} />
+          <Route path="/patelmenudetails" element={<Patelmenudetails />} />
           <Route path="/patelallcomplaint" element={<Patelallcomplaint />} />
 
           <Route path="/tilakstudent" element={<Tilakstudent />} />
@@ -40,6 +44,7 @@ function App() {
 
           <Route path="/accountant" element={<Accountant />} />
         </Routes>
+    
       </Router>
     );
   }
