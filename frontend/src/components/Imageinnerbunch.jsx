@@ -1,5 +1,6 @@
 // Import useState and useEffect
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import Button from "@mui/material/Button";
@@ -19,97 +20,112 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 const Imageinnerbunch = () => {
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [uploadStatus, setUploadStatus] = useState(null);
-  const [itemData, setItemData] = useState([]);
 
-  useEffect(() => {
-    // Fetch item data when the component mounts
-    fetchItemData();
-  }, []);
+  const [image, setImage] = useState();
+    const [allImage, setAllImage] = useState([]);
 
-  const fetchItemData = async () => {
-    try {
-      const response = await fetch("http://localhost:5000/api/getImages");
-      if (response.ok) {
-        const images = await response.json();
-        setItemData(images);
-      } else {
-        console.error("Failed to fetch images");
-      }
-    } catch (error) {
-      console.error("Error fetching images:", error);
+
+    useEffect(() =>{
+        getImage();
+    },[]);
+    const submitImage = async(e) =>{
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("image", image);
+
+        const result = await axios.post(
+            "http://localhost:5000/upload-image",
+            formData,
+            {
+                headers:{"Content-Type": "multipart/form-data"},
+            }
+        );
+    };
+
+    const onInputChange = (e) =>{
+        console.log(e.target.files[0]);
+        setImage(e.target.files[0]);
     }
-  };
 
-  const handleImageUpload = async () => {
-    if (!selectedImage) {
-      return;
+    const getImage = async() =>{
+        const result = await axios.get("http://localhost:5000/get-image");
+        console.log(result);
+        setAllImage(result.data.data);
     }
 
-    try {
-      const formData = new FormData();
-      formData.append("image", selectedImage);
-
-      const response = await fetch("http://localhost:5000/api/uploadImage", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (response.ok) {
-        setUploadStatus("Image uploaded successfully");
-
-        // Fetch updated item data after uploading
-        fetchItemData();
-      } else {
-        setUploadStatus("Failed to upload image");
-      }
-    } catch (error) {
-      console.error("Error uploading image:", error);
-      setUploadStatus("Internal Server Error");
-    }
-  };
-
-  const renderImageItems = () => {
-    itemData.forEach((item) => {
-      console.log('item.data:', item.data);
-      console.log('base64:', item.data.toString('base64'));
-    });
-    return itemData.map((item) => (
-     
-      <ImageListItem key={item._id}>
-       
-       <img
-        src={`http://localhost:5000${item.imageUrl}`}  // Update the server URL
-        alt={item.filename}
-        loading="lazy"
-      />
-      </ImageListItem>
-    ));
-  };
-
+  
   return (
     <div>
-      <ImageList variant="quilted" cols={4} rowHeight={121}>
-        {renderImageItems()}
-      </ImageList>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <Button
-          component="label"
-          variant="contained"
-          size="large"
-          startIcon={<CloudUploadIcon />}
-          onClick={handleImageUpload}
-        >
-          Upload Image
-          <VisuallyHiddenInput
-            accept="image/*"
-            type="file"
-            onChange={(e) => setSelectedImage(e.target.files[0])}
-          />
-        </Button>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+          gap: "5px",
+          marginBottom: "20px",
+        }}
+      >
+        {allImage == null
+          ? ""
+          : allImage.map((data, index) => (
+              <div key={index} style={{ width: "100%", height: "100%" }}>
+                <img
+                  src={require(`./../images/${data.image}`)}
+                  alt={data.image}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+              </div>
+            ))}
       </div>
-      {uploadStatus && <p>{uploadStatus}</p>}
+
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "" }}>
+  <form
+    onSubmit={submitImage}
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      padding: "20px",
+      border: "1px solid #ccc",
+      borderRadius: "8px",
+      boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+      backgroundColor: "#fff",
+    }}
+  >
+    <label
+      style={{
+        marginBottom: "10px",
+        padding: "10px",
+        border: "1px solid #ccc",
+        borderRadius: "4px",
+        cursor: "pointer",
+        backgroundColor: "#f0f0f0",
+      }}
+    >
+      Choose Image
+      <input
+        type="file"
+        name="image"
+        accept="image/*"
+        onChange={onInputChange}
+        style={{ display: "none" }}
+      />
+    </label>
+    <button
+      type="submit"
+      style={{
+        backgroundColor: "#4caf50",
+        color: "white",
+        padding: "10px 20px",
+        border: "none",
+        borderRadius: "4px",
+        cursor: "pointer",
+      }}
+    >
+      Submit
+    </button>
+  </form>
+</div>
+
     </div>
   );
 };

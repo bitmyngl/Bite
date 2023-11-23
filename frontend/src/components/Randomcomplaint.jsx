@@ -68,7 +68,7 @@ export default function Review(props) {
           </CardHeader>
           <CardBody className="mb-6 p-0">
             <Typography className="comment-text-randomcomplaint">
-              &quot;Lorem ipsum dolor sit amet consectetur, adipisicing elit.&quot;
+              &quot;{props.complaint}&quot;
             </Typography>
           </CardBody>
         </Card>

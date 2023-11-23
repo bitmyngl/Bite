@@ -1,4 +1,5 @@
 .imagebunch-outerbox{
-    border: 2px solid red;
-    padding : 10px;
+    /* border: 2px solid red; */
+    padding : 4px;
+    padding-top: 4px;
 }

@@ -16,6 +16,7 @@ import Signup from './pages/Signup';
 import Otpverification from "./pages/Otpverification";
 import Passwordcreate from './pages/Passwordcreate';
 import Patelmenudetails from './components/Patelmenudetails';
+import Cheifwardenallcomplaint from "./pages/cheifwarden/Cheifwardenallcomplaint"
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
           <Route path="/tilakstudent" element={<Tilakstudent />} />
 
           <Route path="/cheifwarden" element={<Cheifwarden />} />
+          <Route path="/cheifwardenallcomplaint" element={<Cheifwardenallcomplaint />} />
 
           <Route path="/accountant" element={<Accountant />} />
         </Routes>

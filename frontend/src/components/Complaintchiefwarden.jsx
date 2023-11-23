@@ -61,7 +61,7 @@ export default function Complaint() {
       </div>
 
       <div className="upper-section1">
-      <Link to="/patelallcomplaint">
+      <Link to="/cheifwardenallcomplaint">
         <a class="btn btn-secondary" href="#" role="button">
           See all complaints & Register your Complaint
         </a>

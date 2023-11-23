@@ -1,98 +1,77 @@
 import React, { useState, useEffect } from "react";
 import "./../styles/complaintlist.css";
 import Randomcomplaintchiefwarden from "./Randomcomplaintchiefwarden";
+import axios from 'axios';
 
 function Complaintlist() {
-  const [commentText, setCommentText] = useState("");
-  const [comments, setComments] = useState([]);
+  const [complaintText, setComplaintText] = useState("");
+  const [complaints, setComplaints] = useState([]);
 
   useEffect(() => {
-    // Load comments from local storage when the component mounts
-    const storedComments = localStorage.getItem("comments");
-    if (storedComments) {
-      setComments(JSON.parse(storedComments));
-    }
+    fetchComplaints();
   }, []);
 
-  useEffect(() => {
-    // Save comments to local storage whenever the comments state changes
-    localStorage.setItem("comments", JSON.stringify(comments));
-  }, [comments]);
-
-  const handleCommentChange = (event) => {
-    setCommentText(event.target.value);
+  const fetchComplaints = () => {
+    axios.get("http://localhost:5000/api/patelcomplaint")
+      .then(response => {
+        console.log(response.data);
+        setComplaints(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching complaints:', error);
+      });
   };
 
-  const handleCommentSubmit = () => {
-    if (commentText.trim() !== "") {
-      // Add the new comment to the list
-      setComments([...comments, commentText]);
+  const handleComplaintChange = (event) => {
+    setComplaintText(event.target.value);
+  };
 
-      // Clear the input field
-      setCommentText("");
+  const handleComplaintSubmit = () => {
+    if (complaintText.trim() !== "") {
+      axios.post("http://localhost:5000/api/patelcomplaint", {
+        // Include other fields as needed (username, email, regno, time)
+        complaint: complaintText,
+      })
+        .then(() => {
+          // If the complaint is successfully saved, fetch the updated complaints
+          fetchComplaints();
+          // Clear the input field
+          setComplaintText("");
+        })
+        .catch(error => {
+          console.error('Error adding complaint:', error);
+        });
     }
   };
 
   return (
-    <div className="commentlist-outer">
-      <div className="commentlist-second-outer container">
+    <div className="complaintlist-outer">
+      <div className="complaintlist-second-outer container">
         <h1>Complaint List</h1>
         <div className="row">
-          <div className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-            <Randomcomplaintchiefwarden comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
-          </div>
-
-          <div className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-            <Randomcomplaintchiefwarden comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
-          </div>
-
-          <div className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-            <Randomcomplaintchiefwarden comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
-          </div>
-
-          <div className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-            <Randomcomplaintchiefwarden comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
-          </div>
-
-          <div className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-            <Randomcomplaintchiefwarden comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
-          </div>
-
-          <div className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-            <Randomcomplaintchiefwarden comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
-          </div>
-
-          <div className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-            <Randomcomplaintchiefwarden comment="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis soluta excepturi explicabo eius nam, quas aliquid eveniet provident quod ad." />
-          </div>
-
-          {comments.map((comment, index) => (
-            <div
-              key={index}
-              className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4"
-            >
-              <Randomcomplaintchiefwarden comment={comment} />
+          {complaints.map((complaintObj, index) => (
+            <div key={index} className="complaint-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
+              <Randomcomplaintchiefwarden complaint={complaintObj.complaint} />
             </div>
           ))}
         </div>
       </div>
 
-      <div className="add-comment-section">
-        <h1 className="add-new-comment-heading">Register Your Complaint here</h1>
+      <div className="add-complaint-section">
+        <h1 className="add-new-complaint-heading">Register Your Complaint here</h1>
         <div className="form-group">
           <textarea
             className="form-control"
             id="exampleFormControlTextarea1"
             rows="10"
-            value={commentText}
-            onChange={handleCommentChange}
+            value={complaintText}
+            onChange={handleComplaintChange}
           ></textarea>
         </div>
         <div className="submit-section">
-        <button className="btn btn-primary" onClick={handleCommentSubmit}>
+          <button className="btn btn-primary" onClick={handleComplaintSubmit}>
             Submit
           </button>
-
         </div>
       </div>
     </div>

@@ -1,12 +1,12 @@
 import React from "react";
 import Navbar from "./../../components/Navbar";
-import Complaintlist from "../../components/Complaintlist";
+import Patelcomplaintlist from "../../components/Patelcomplaintlist";
 
 function Patelallcomplaint(){
         return (
             <div>
                 <Navbar />
-                <Complaintlist />
+                <Patelcomplaintlist />
             </div>
         );
 }
