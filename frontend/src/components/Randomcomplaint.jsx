@@ -1,4 +1,7 @@
+import {useState} from "react";
 import "./../styles/randomcomplaint.css";
+
+
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
 
@@ -28,6 +31,19 @@ function StarIcon() {
 }
 
 export default function Review(props) {
+
+  const [upvoteCount, setUpvoteCount] = useState(0);
+  const [downvoteCount, setDownvoteCount] = useState(0);
+
+  const handleUpvote = () => {
+    // Increment the upvote count
+    setUpvoteCount(upvoteCount + 1);
+  };
+
+  const handleDownvote = () => {
+    // Increment the downvote count
+    setDownvoteCount(downvoteCount - 1);
+  };
   return (
     <div>
       <div className="review-outermost-box-randomcomplaint">
@@ -74,10 +90,14 @@ export default function Review(props) {
         </Card>
       </div><div className="button-group-complaint">
 
-<div className="upbutton-group-box">
+<div className="upbutton-group-box" onClick={handleUpvote}>
       <ArrowCircleUpIcon className="uparrow-complaint" style={{ fontSize: '40px' }}/>
+      {/* Display the upvote count */}
+      <span className="vote-count">{upvoteCount}</span>
 </div>
-<div className="downbutton-group-box">
+<div className="downbutton-group-box" onClick={handleDownvote}>
+      {/* Display the downvote count */}
+      <span className="vote-count">{downvoteCount}</span>
       <ArrowCircleDownIcon className="downarrow-complaint" style={{ fontSize: '40px' }}/>
 </div>
 
