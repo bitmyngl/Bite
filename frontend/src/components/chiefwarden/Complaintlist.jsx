@@ -19,7 +19,7 @@ function Complaintlist() {
   const fetchComplaints = () => {
     axios.get("http://localhost:5000/api/patelcomplaint")
       .then(response => {
-        console.log(response.data);
+        console.log("my data" + response.data);
         setComplaints(response.data);
       })
       .catch(error => {
@@ -57,7 +57,8 @@ function Complaintlist() {
         <div className="row">
           {complaints.map((complaintObj, index) => (
             <div key={index} className="complaint-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-              <Randomcomplaintchiefwarden complaint={complaintObj.complaint} username={complaintObj.username}/>
+          
+               <Randomcomplaintchiefwarden _id={complaintObj._id} complaint={complaintObj.complaint} username={complaintObj.username} status={complaintObj.resolved} />
             </div>
           ))}
         </div>

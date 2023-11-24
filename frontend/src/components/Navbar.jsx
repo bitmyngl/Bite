@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,16 +15,19 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
-const pages = ['Comment', 'Gallery', 'Complaint','Messmenu'];
+const pages = ['Comment', 'Gallery', 'Complaint', 'Messmenu'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const links = ['/patelcomment', '/patelgallery', '/patelallcomplaint', '/patelfullmenu'];
 
 function ResponsiveAppBar() {
+  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -33,6 +38,11 @@ function ResponsiveAppBar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleNavigation = (link) => {
+    window.location.href = link;
+    handleCloseNavMenu();
   };
 
   return (
@@ -56,7 +66,7 @@ function ResponsiveAppBar() {
               fontSize: '2.8rem',
             }}
           >
-            LOGO
+            Bite
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -88,8 +98,8 @@ function ResponsiveAppBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+              {pages.map((page, index) => (
+                <MenuItem key={page} onClick={() => handleNavigation(links[index])}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -115,11 +125,11 @@ function ResponsiveAppBar() {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {pages.map((page, index) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block',fontSize: '1.3rem' }}
+                onClick={() => handleNavigation(links[index])}
+                sx={{ my: 2, color: 'white', display: 'block', fontSize: '1.3rem' }}
               >
                 {page}
               </Button>
@@ -148,8 +158,8 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+              {settings.map((setting, index) => (
+                <MenuItem key={setting} onClick={() => handleNavigation(links[index])}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
@@ -160,4 +170,5 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
+
 export default ResponsiveAppBar;

@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "./../components/Navbar.jsx";
+import Navbar from "./../components/Navbar";
 import Gallary from "../components/Gallery.jsx";
 import Comment from "../components/Currentmessmenu.jsx"
 import Currentmenu from "./../components/Currentmessmenu.jsx"

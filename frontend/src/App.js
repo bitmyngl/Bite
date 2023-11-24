@@ -19,6 +19,7 @@ import Passwordcreate from './pages/Passwordcreate';
 import Patelmenudetails from './components/Patelmenudetails';
 import Cheifwardenallcomplaint from "./pages/cheifwarden/Cheifwardenallcomplaint"
 import UserContext from "./components/Usercontext";
+import SignIn from './pages/SignIn';
 
 function App() {
   const [username, setUsername] = useState('JohnDoe');
@@ -28,7 +29,7 @@ function App() {
         {/* <Navbar /> */}
         <UserContext.Provider value={{ username, setUsername }}>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/otpverification" element={<Otpverification />} />

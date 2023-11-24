@@ -1,6 +1,8 @@
 import "./../../styles/randomcomplaintchiefwarden.css";
 import { pink } from '@mui/material/colors';
 import Checkbox from '@mui/material/Checkbox';
+import axios from "axios";
+import { useState } from "react";
 
 
 import {
@@ -31,6 +33,22 @@ function StarIcon() {
 }
 
 export default function Review(props) {
+  const [resolved, setResolved] = useState(false);
+  console.log('Complaint ID:', props._id);
+
+
+  const handleCheckboxChange = async () => {
+    setResolved(!resolved);
+
+    try {
+      // Replace 'YOUR_BACKEND_URL' with the actual URL of your backend server
+      await axios.put(`/updateResolved/${props._id}`);
+    } catch (error) {
+      console.error('Error updating resolved field on the backend:', error);
+    }
+  };
+
+
   return (
     <div>
       <div className="review-outermost-box-randomcomplaint">
@@ -65,7 +83,7 @@ export default function Review(props) {
                 </div>
               </div>
               <Typography variant="h5" color="blue-grey">
-                3rd Year student
+                {props.status}
               </Typography>
             </div>
           </CardHeader>
@@ -77,7 +95,9 @@ export default function Review(props) {
         </Card>
       </div>
       <div className="button-group-complaint">
-      <Checkbox {...label} color="success" size="large"/>
+      <Checkbox {...label} color="success" size="large"checked={resolved}
+        onChange={handleCheckboxChange}
+/>
       </div>
     </div>
   );

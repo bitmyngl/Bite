@@ -1,9 +1,5 @@
-import * as React from 'react';
-import { useContext } from 'react';
-import axios from 'axios';
+import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { useHistory } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,62 +9,41 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import UserContext from '../components/Usercontext';
-
-
-function Copyright(props) {
-
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-// TODO remove, this demo shouldn't need to reset the theme.
+import "./../styles/signin.css"
 
 const defaultTheme = createTheme();
 
-
-export default function SignIn() {
-  const { username, setUsername } = useContext(UserContext);
-  
-  
+function SignIn() {
   const navigate = useNavigate();
-  // const history = useHistory();
-
+  const { username, setUsername } = useContext(UserContext);
   const [rememberMe, setRememberMe] = useState(false);
-  const [initialValues, setInitialValues] = useState({
-    email: '',
-    password: '',
-  });
+  const [loading, setLoading] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const storedValues = localStorage.getItem('rememberedValues');
 
     if (storedValues) {
-      setInitialValues(JSON.parse(storedValues));
       setRememberMe(true);
     }
   }, []);
 
-
-  
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     const data = new FormData(event.currentTarget);
 
     if (rememberMe) {
-      localStorage.setItem('rememberedValues', JSON.stringify({ email: data.get('email'), password: data.get('password') }));
+      localStorage.setItem(
+        'rememberedValues',
+        JSON.stringify({ email: data.get('email'), password: data.get('password') })
+      );
     } else {
       localStorage.removeItem('rememberedValues');
     }
@@ -92,23 +67,21 @@ export default function SignIn() {
 
       const result = await response.json();
 
-      // Handle the result as needed
       console.log(result);
-  
+
       if (result.success) {
         const response2 = await fetch('http://localhost:5000/api/getUsername', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: data.get('email'),
-          password: data.get('password'),
-        }),
-      });
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: data.get('email'),
+            password: data.get('password'),
+          }),
+        });
 
-      const userResponse =  await response2.json();
-      console.log(userResponse.data);
+        const userResponse = await response2.json();
         const usernameFromServer = userResponse.username;
 
         setUsername(usernameFromServer);
@@ -117,10 +90,16 @@ export default function SignIn() {
         console.log('User Identity:', result.identity);
 
         const identity = result.identity;
-        if (identity === "patelstudent") {
-          navigate("/patelstudent");
-        } else if (identity === "tilakstudent") {
-          navigate("/tilakstudent");
+        if (identity === 'patelstudent') {
+          // Use navigate to redirect
+          navigate('/patelstudent');
+        } else if (identity === 'tilakstudent') {
+          // Use navigate to redirect
+          navigate('/tilakstudent');
+        } else if(identity === 'cheifwarden'){
+          navigate('/cheifwarden');
+        } else if(identity === 'accountant'){
+          navigate('/accountant');
         }
       } else {
         console.error('Login failed');
@@ -129,26 +108,21 @@ export default function SignIn() {
     } catch (error) {
       console.error('Error during login:', error);
     }
+
+    // Your existing code for form submission...
+
+    setLoading(false);
   };
 
-
-
-    // if (data.get('email') === 'sourapatel' && data.get('password') === '7811069775') {
-    //   navigate('/patelstudent');  // Use navigate to redirect
-    // } 
-    // if (data.get('email') === 'souratilak' && data.get('password') === '7811069775') {
-    //   navigate('/patelstudent');  // Use navigate to redirect
-    // } 
-    // if (data.get('email') === 'cheifwarden' && data.get('password') === '7811069775') {
-    //   navigate('/cheifwarden');  // Use navigate to redirect
-    // } 
-    // if (data.get('email') === 'accountant' && data.get('password') === '7811069775') {
-    //   navigate('/accountant');  // Use navigate to redirect
-    // } 
-
-
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <div className='signinouterdiv' >
+      <ThemeProvider theme={defaultTheme}>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -157,6 +131,11 @@ export default function SignIn() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            backgroundColor: 'rgba(255, 255, 255, 0.9)', // Adjust the opacity as needed
+            padding: '20px',
+            borderRadius: '10px',
+            boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.1)',
+            backdropFilter: 'blur(10px)', // Apply the blur effect
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -165,7 +144,12 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
             <TextField
               margin="normal"
               required
@@ -205,16 +189,17 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link href="/signup">
+                  <p>Don't have an account? Sign Up</p>
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
+    </div>
   );
 }
 
+export default SignIn;
