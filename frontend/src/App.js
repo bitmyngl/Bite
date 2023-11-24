@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // import Navigation from './Navigation';
 import Home from './pages/Home';
@@ -17,14 +18,15 @@ import Otpverification from "./pages/Otpverification";
 import Passwordcreate from './pages/Passwordcreate';
 import Patelmenudetails from './components/Patelmenudetails';
 import Cheifwardenallcomplaint from "./pages/cheifwarden/Cheifwardenallcomplaint"
-
+import UserContext from "./components/Usercontext";
 
 function App() {
+  const [username, setUsername] = useState('JohnDoe');
     return (
       <Router>
         {/* <Navigation /> */}
         {/* <Navbar /> */}
-      
+        <UserContext.Provider value={{ username, setUsername }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -46,6 +48,7 @@ function App() {
 
           <Route path="/accountant" element={<Accountant />} />
         </Routes>
+        </UserContext.Provider>
     
       </Router>
     );

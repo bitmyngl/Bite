@@ -52,15 +52,15 @@ export default function Review(props) {
                    {props.username}
                 </Typography>
                 <div className="5 flex items-center gap-0">
+                  {/* <StarIcon />
                   <StarIcon />
                   <StarIcon />
                   <StarIcon />
-                  <StarIcon />
-                  <StarIcon />
+                  <StarIcon /> */}
                 </div>
               </div>
               <Typography variant="h5" color="blue-gray">
-                2nd Year Room no 326
+                
               </Typography>
             </div>
           </CardHeader>

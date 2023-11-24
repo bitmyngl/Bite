@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Review from "./Review";
 import axios from 'axios';
+import { useContext } from 'react';
+import  UserContext  from './Usercontext';
 
 // Import Swiper styles
 import "swiper/css";
@@ -16,6 +18,7 @@ import "./../styles/comment.css";
 import { EffectCoverflow, Pagination } from "swiper/modules";
 
 export default function App() {
+
 
   const [comments, setComments] = useState([]);
 
@@ -64,10 +67,11 @@ export default function App() {
             modules={[EffectCoverflow, Pagination]}
           >
             
+            {console.log(comments)}
 
             {comments.map((comment, index) => (
             <SwiperSlide key={index}>
-              <Review comment={comment.comment} />
+              <Review comment={comment.comment} username = {comment.username}/>
             </SwiperSlide>
           ))}
 

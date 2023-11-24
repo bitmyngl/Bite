@@ -70,14 +70,17 @@ body{
 .swiper-slide {
   background-position: center;
   background-size: cover;
-  width: 300px;
+  width: 280px;
   height: 300px;
+  /* border: 2px solid red; */
+  /* background-color: #000; */
+  /* background-color: rgb(220, 127, 46); */
 }
 
 .swiper-slide img {
   display: block;
   width: 100%;
-  border: 2px solid re;
+
 }
 .swiper-container {
     position: relative;

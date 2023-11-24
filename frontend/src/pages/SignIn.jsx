@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 // import { useHistory } from 'react-router-dom';
@@ -16,6 +17,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import UserContext from '../components/Usercontext';
+
 
 function Copyright(props) {
 
@@ -37,6 +40,8 @@ const defaultTheme = createTheme();
 
 
 export default function SignIn() {
+  const { username, setUsername } = useContext(UserContext);
+  
   
   const navigate = useNavigate();
   // const history = useHistory();
@@ -91,47 +96,56 @@ export default function SignIn() {
       console.log(result);
   
       if (result.success) {
-        // If login is successful, redirect or perform other actions
+        const response2 = await fetch('http://localhost:5000/api/getUsername', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: data.get('email'),
+          password: data.get('password'),
+        }),
+      });
+
+      const userResponse =  await response2.json();
+      console.log(userResponse.data);
+        const usernameFromServer = userResponse.username;
+
+        setUsername(usernameFromServer);
+
         console.log('Login successful');
         console.log('User Identity:', result.identity);
-        // Example: Redirect to a desired path
-        // navigate('/desired-path');
+
         const identity = result.identity;
-        if(identity === "patelstudent"){
+        if (identity === "patelstudent") {
           navigate("/patelstudent");
-        }else if(identity === "tilakstudent"){
+        } else if (identity === "tilakstudent") {
           navigate("/tilakstudent");
         }
-        
       } else {
-        // If login fails, display an error message or take other actions
         console.error('Login failed');
         console.error('Error message:', result.message);
-        // Example: Display an error message to the user
-        // setError(result.message);
       }
     } catch (error) {
-      // Handle network or other errors
       console.error('Error during login:', error);
-      // Example: Display a generic error message
-      // setError('An error occurred during login');
     }
-
-
-
-    if (data.get('email') === 'sourapatel' && data.get('password') === '7811069775') {
-      navigate('/patelstudent');  // Use navigate to redirect
-    } 
-    if (data.get('email') === 'souratilak' && data.get('password') === '7811069775') {
-      navigate('/patelstudent');  // Use navigate to redirect
-    } 
-    if (data.get('email') === 'cheifwarden' && data.get('password') === '7811069775') {
-      navigate('/cheifwarden');  // Use navigate to redirect
-    } 
-    if (data.get('email') === 'accountant' && data.get('password') === '7811069775') {
-      navigate('/accountant');  // Use navigate to redirect
-    } 
   };
+
+
+
+    // if (data.get('email') === 'sourapatel' && data.get('password') === '7811069775') {
+    //   navigate('/patelstudent');  // Use navigate to redirect
+    // } 
+    // if (data.get('email') === 'souratilak' && data.get('password') === '7811069775') {
+    //   navigate('/patelstudent');  // Use navigate to redirect
+    // } 
+    // if (data.get('email') === 'cheifwarden' && data.get('password') === '7811069775') {
+    //   navigate('/cheifwarden');  // Use navigate to redirect
+    // } 
+    // if (data.get('email') === 'accountant' && data.get('password') === '7811069775') {
+    //   navigate('/accountant');  // Use navigate to redirect
+    // } 
+
 
   return (
     <ThemeProvider theme={defaultTheme}>

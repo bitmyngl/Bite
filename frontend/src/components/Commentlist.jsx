@@ -2,10 +2,15 @@ import React, { useState, useEffect } from "react";
 import Review from "./Review";
 import "./../styles/commentlist.css";
 import axios from 'axios';
+import { useContext } from 'react';
+import  UserContext  from './Usercontext';
 
 function Commentlist() {
   const [commentText, setCommentText] = useState("");
   const [comments, setComments] = useState([]);
+
+  // Example using context
+  const { username, setUsername } = useContext(UserContext);
 
   useEffect(() => {
     fetchComments();
@@ -30,10 +35,12 @@ function Commentlist() {
     if (commentText.trim() !== "") {
       axios.post("http://localhost:5000/api/patelcomment", {
         // Include other fields as needed (username, email, regno, time)
+        username : username,
         comment: commentText,
       })
         .then(() => {
           // If the comment is successfully saved, fetch the updated comments
+          console.log(username);
           fetchComments();
           // Clear the input field
           setCommentText("");
@@ -51,7 +58,7 @@ function Commentlist() {
         <div className="row">
           {comments.map((commentObj, index) => (
             <div key={index} className="comment-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-              <Review comment={commentObj.comment} />
+              <Review comment={commentObj.comment} username={commentObj.username}/>
             </div>
           ))}
         </div>

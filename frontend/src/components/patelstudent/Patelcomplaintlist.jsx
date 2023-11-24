@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
-import "./../styles/complaintlist.css";
-import Randomcomplaintchiefwarden from "./Randomcomplaintchiefwarden";
+import "./../../styles/complaintlist.css";
+import Randomcomplaint from "./Randomcomplaint";
 import axios from 'axios';
+import { useContext } from 'react';
+import  UserContext  from './../Usercontext';
 
 function Complaintlist() {
   const [complaintText, setComplaintText] = useState("");
   const [complaints, setComplaints] = useState([]);
+
+   // Example using context
+   const { username, setUsername } = useContext(UserContext);
 
   useEffect(() => {
     fetchComplaints();
@@ -30,6 +35,7 @@ function Complaintlist() {
     if (complaintText.trim() !== "") {
       axios.post("http://localhost:5000/api/patelcomplaint", {
         // Include other fields as needed (username, email, regno, time)
+        username : username,
         complaint: complaintText,
       })
         .then(() => {
@@ -51,7 +57,7 @@ function Complaintlist() {
         <div className="row">
           {complaints.map((complaintObj, index) => (
             <div key={index} className="complaint-card col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-              <Randomcomplaintchiefwarden complaint={complaintObj.complaint} />
+              <Randomcomplaint complaint={complaintObj.complaint} username={complaintObj.username}/>
             </div>
           ))}
         </div>

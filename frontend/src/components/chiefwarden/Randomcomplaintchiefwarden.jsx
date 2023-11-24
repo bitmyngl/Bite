@@ -1,4 +1,4 @@
-import "./../styles/randomcomplaintchiefwarden.css";
+import "./../../styles/randomcomplaintchiefwarden.css";
 import { pink } from '@mui/material/colors';
 import Checkbox from '@mui/material/Checkbox';
 
@@ -54,7 +54,7 @@ export default function Review(props) {
             <div className="flex w-full flex-col gap-0.5">
               <div className="flex items-center justify-between">
                 <Typography variant="h2" color="blue-grey">
-                  Mrinsh Kwes
+                  {props.username}
                 </Typography>
                 <div className="5 flex items-center gap-0">
                   <StarIcon />

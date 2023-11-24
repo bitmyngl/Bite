@@ -60,7 +60,7 @@ function OtpVerification() {
               </h6>{" "}
               <div>
                 <span>A code has been sent to</span>
-                <small>*******9897</small>
+                <small>your email</small>
               </div>
               <div
                 id="otp"

@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "./../../components/Navbar";
-import Patelcomplaintlist from "../../components/Patelcomplaintlist";
+import Patelcomplaintlist from "../../components/patelstudent/Patelcomplaintlist";
 
 function Patelallcomplaint(){
         return (

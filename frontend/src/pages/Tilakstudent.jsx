@@ -6,7 +6,7 @@ import Currentmenu from "./../components/Currentmessmenu.jsx"
 import Review from "../components/Review.jsx";
 import Feedback from "../components/Comment.jsx";
 import Tilakintro from "./../components/Tilakintro.jsx";
-import Complaint from "../components/Complaint.jsx";
+import Complaint from "../components/patelstudent/Complaint.jsx";
 
 function Patelstudent(){
     return(
