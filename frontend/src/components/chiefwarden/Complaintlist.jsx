@@ -11,7 +11,7 @@ function Complaintlist() {
 
     // Example using context
     const { username, setUsername } = useContext(UserContext);
-
+      
   useEffect(() => {
     fetchComplaints();
   }, []);
